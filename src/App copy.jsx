@@ -45,28 +45,22 @@ const Toast = ({ message }) => (
   {message}
   </div>
 );
-const ConnectedToast = ({ message }) => (
-  <div className="fixed top-5 right-5 z-50 w-[300px] max-w-xs p-4 text-white bg-blue-600 rounded-md shadow-md animate-fade-in-down">
-  {message}
-  </div>
-);
-
 function App() {
 
- const [errorMsg, setErrorMsg] = useState("");
- const [ConnectedMsg, setConnectedMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${URL}`);
+        const response = await axios.get(`${URL}api/`);
         console.log(response.data);
-        setConnectedMsg("✅ Back end Handshake connected successfully");
+        setErrorMsg("Back end Handshake connected successfully");
       } catch (err) {
-        setErrorMsg(" Back end Handshake failed");
-      } finally {
+        setErrorMsg("Back end Handshake failed");
+        
+      }finally {
         setTimeout(() => {
-          setConnectedMsg("");
           setErrorMsg("");
         }, 3000);
       }
@@ -74,7 +68,6 @@ function App() {
 
     fetchData();
   }, []);
-
 // useEffect(() => {
     
 
@@ -103,7 +96,6 @@ function App() {
     <>
       <BrowserRouter >
           {errorMsg && <Toast message={errorMsg} />}
-          {ConnectedMsg && <ConnectedToast message={ConnectedMsg} />}
         <Navbar />
         <ScrollToTop />
         <Routes>
