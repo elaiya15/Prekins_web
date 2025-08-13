@@ -61,7 +61,11 @@ function App() {
       try {
         const response = await axios.get(`${URL}`);
         console.log(response.data);
-        setConnectedMsg("✅ Back end Handshake connected successfully");
+        if (response.data==='Server is Live.' || response.data==='Server is running') {
+          setConnectedMsg("✅ Back end Handshake connected successfully");
+          
+        }
+       
       } catch (err) {
         setErrorMsg(" Back end Handshake failed");
       } finally {
